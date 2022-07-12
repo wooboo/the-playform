@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Navbar from '../components/Navbars/AuthNavbar';
 import Footer from '../components/Footers/Footer';
 
-export default function Profile(props) {
+export default function Profile() {
   return (
     <>
       <Navbar transparent />

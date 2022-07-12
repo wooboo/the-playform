@@ -24,7 +24,7 @@ const UserDropdown = () => {
   return (
     <>
       <a
-        className="text-slate-500 block"
+        className="block text-slate-500"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -32,14 +32,14 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center flex">
-          <span className="w-12 h-12 text-sm text-white bg-slate-200 inline-flex items-center justify-center rounded-full">
+        <div className="flex items-center">
+          <span className="inline-flex items-center justify-center w-12 h-12 text-sm text-white rounded-full bg-slate-200">
             {session && (
               <Image
                 width={800}
                 height={800}
                 alt="..."
-                className="w-full rounded-full align-middle border-none shadow-lg"
+                className="w-full align-middle border-none rounded-full shadow-lg"
                 src={session?.user?.image??"/img/team-1-800x800.jpg"}
               />
             )}
@@ -53,7 +53,7 @@ const UserDropdown = () => {
           'bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48'
         }
       >
-        {session ? (
+        {session && session.user? (
           <>
             <a
               href="#signout"
@@ -77,7 +77,7 @@ const UserDropdown = () => {
         ) : (
           <Link
             href="/auth/signin"
-            className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+            className="block w-full px-4 py-2 text-sm font-normal bg-transparent whitespace-nowrap text-slate-700"
           >
             Sign In
           </Link>
