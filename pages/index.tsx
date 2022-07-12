@@ -11,7 +11,7 @@ import Hero from "../components/Landing/Hero";
 export default function Landing() {
   return (
     <>
-      <Navbar transparent />
+      <Navbar />
       <main>
         <div className="relative flex items-center content-center justify-center pt-16 pb-32 min-h-screen-75">
           <div

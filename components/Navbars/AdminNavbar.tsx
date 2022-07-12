@@ -1,7 +1,6 @@
 import React from "react";
 
-import UserDropdown from "../../components/Dropdowns/UserDropdown";
-import ProfileMenuItem from "./ProfileMenuItem";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function Navbar() {
   return (
@@ -32,7 +31,7 @@ export default function Navbar() {
           </form>
           {/* User */}
           <ul className="flex-col items-center hidden list-none md:flex-row md:flex">
-            <ProfileMenuItem />
+            <ProfileDropdown />
           </ul>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 {
-  "name": "the-platform2",
+  "name": "@the-platform/web",
   "version": "0.1.0",
   "packageManager": "yarn@3.2.1",
   "private": true,

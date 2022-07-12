@@ -10,11 +10,11 @@ interface AuthProps {
 export default function Auth({ children }: AuthProps) {
   return (
     <>
-      <Navbar transparent />
+      <Navbar />
       <main>
-        <section className="relative w-full h-full py-40 min-h-screen">
+        <section className="relative w-full h-full min-h-screen py-40">
           <div
-            className="absolute top-0 w-full h-full bg-slate-800 bg-no-repeat bg-full"
+            className="absolute top-0 w-full h-full bg-no-repeat bg-slate-800 bg-full"
             style={{
               backgroundImage: "url('/img/register_bg_2.png')",
             }}

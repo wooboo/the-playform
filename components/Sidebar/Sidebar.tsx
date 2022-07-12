@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import NotificationDropdown from "../../components/Dropdowns/NotificationDropdown";
-import UserDropdown from "../../components/Dropdowns/UserDropdown";
 import Section from "./Section";
 import Item from "./Item";
+import ProfileDropdown from "../Navbars/ProfileDropdown";
+import NotificationDropdown from "../Dropdowns/NotificationDropdown";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -37,7 +37,7 @@ export default function Sidebar() {
               <NotificationDropdown />
             </li>
             <li className="relative inline-block">
-              <UserDropdown />
+              <ProfileDropdown />
             </li>
           </ul>
           {/* Collapse */}
