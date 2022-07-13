@@ -1,123 +1,99 @@
 import React from "react";
-// import Chart from "chart.js/auto";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 export default function CardBarChart() {
-  // React.useEffect(() => {
-  //   let config = {
-  //     type: "bar",
-  //     data: {
-  //       labels: [
-  //         "January",
-  //         "February",
-  //         "March",
-  //         "April",
-  //         "May",
-  //         "June",
-  //         "July",
-  //       ],
-  //       datasets: [
-  //         {
-  //           label: new Date().getFullYear(),
-  //           backgroundColor: "#ed64a6",
-  //           borderColor: "#ed64a6",
-  //           data: [30, 78, 56, 34, 100, 45, 13],
-  //           fill: false,
-  //           barThickness: 8,
-  //         },
-  //         {
-  //           label: new Date().getFullYear() - 1,
-  //           fill: false,
-  //           backgroundColor: "#4c51bf",
-  //           borderColor: "#4c51bf",
-  //           data: [27, 68, 86, 74, 10, 4, 87],
-  //           barThickness: 8,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       maintainAspectRatio: false,
-  //       responsive: true,
-  //       title: {
-  //         display: false,
-  //         text: "Orders Chart",
-  //       },
-  //       tooltips: {
-  //         mode: "index",
-  //         intersect: false,
-  //       },
-  //       hover: {
-  //         mode: "nearest",
-  //         intersect: true,
-  //       },
-  //       legend: {
-  //         labels: {
-  //           fontColor: "rgba(0,0,0,.4)",
-  //         },
-  //         align: "end",
-  //         position: "bottom",
-  //       },
-  //       scales: {
-  //         xAxes: [
-  //           {
-  //             display: false,
-  //             scaleLabel: {
-  //               display: true,
-  //               labelString: "Month",
-  //             },
-  //             gridLines: {
-  //               borderDash: [2],
-  //               borderDashOffset: [2],
-  //               color: "rgba(33, 37, 41, 0.3)",
-  //               zeroLineColor: "rgba(33, 37, 41, 0.3)",
-  //               zeroLineBorderDash: [2],
-  //               zeroLineBorderDashOffset: [2],
-  //             },
-  //           },
-  //         ],
-  //         yAxes: [
-  //           {
-  //             display: true,
-  //             scaleLabel: {
-  //               display: false,
-  //               labelString: "Value",
-  //             },
-  //             gridLines: {
-  //               borderDash: [2],
-  //               drawBorder: false,
-  //               borderDashOffset: [2],
-  //               color: "rgba(33, 37, 41, 0.2)",
-  //               zeroLineColor: "rgba(33, 37, 41, 0.15)",
-  //               zeroLineBorderDash: [2],
-  //               zeroLineBorderDashOffset: [2],
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   };
-  //   let ctx = document.getElementById("bar-chart").getContext("2d");
-  //   window.myBar = new Chart(ctx, config);
-  //   return window.myBar.destroy;
-  // }, []);
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
+      <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded shadow-lg">
+        <div className="px-4 py-3 mb-0 bg-transparent rounded-t">
           <div className="flex flex-wrap items-center">
-            <div className="relative w-full max-w-full flex-grow flex-1">
-              <h6 className="uppercase text-slate-400 mb-1 text-xs font-semibold">
+            <div className="relative flex-1 flex-grow w-full max-w-full">
+              <h6 className="mb-1 text-xs font-semibold uppercase text-slate-400">
                 Performance
               </h6>
-              <h2 className="text-slate-700 text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-slate-700">
                 Total orders
               </h2>
             </div>
           </div>
         </div>
-        <div className="p-4 flex-auto">
+        <div className="flex-auto p-4">
           {/* Chart */}
           <div className="relative h-350-px">
-            <canvas id="bar-chart"></canvas>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                width={500}
+                height={300}
+                data={data}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#8884d8" />
+                <Bar dataKey="uv" fill="#82ca9d" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
