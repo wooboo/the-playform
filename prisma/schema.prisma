@@ -54,28 +54,44 @@ model VerificationToken {
 }
 
 model Owner {
-  id          String     @id
+  id          String          @id
   name        String
-  email       String
-  address     Json
-  bankAccount Json
+  email       String?
+  address     Json?
+  bankAccount Json?
   users       User[]
-  properties  Property[]
-  premises    Premises[]
+  properties  PropertyOwner[]
+  premises    PremisesOwner[]
 }
 
 model Premises {
-  id         String   @id
+  id         String          @id
   name       String
+  propertyId String
+  property   Property        @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  owners     PremisesOwner[]
+}
+
+model PropertyOwner {
+  id         String   @id
   propertyId String
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   owners     Owner[]
+  fraction   Json
+}
+
+model PremisesOwner {
+  id       String     @id
+  premisesId String
+  premises   Premises @relation(fields: [premisesId], references: [id], onDelete: Cascade)
+  owners   Owner[]
+  fraction Json
 }
 
 model Property {
-  id       String     @id
+  id       String          @id
   name     String
-  address  Json
-  owners   Owner[] 
+  address  Json?
   premises Premises[]
+  owners   PropertyOwner[]
 }

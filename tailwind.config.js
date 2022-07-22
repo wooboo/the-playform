@@ -9,6 +9,7 @@ module.exports = {
       '{pages,layouts,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'
     ),
   ],
+  darkMode: 'class',
   theme: {
     colors: {
       ...colors,

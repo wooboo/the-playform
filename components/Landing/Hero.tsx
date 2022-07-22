@@ -1,19 +1,12 @@
 import Image from "next/image";
+import ImageRound from "../Cards/ImageRound";
 
 export type HeroProps = { image: string; name: string; role: string };
 export const Hero: React.FC<HeroProps> = ({ image, name, role }) => {
   return (
     <div className="w-full px-4 mb-12 md:w-6/12 lg:w-3/12 lg:mb-0">
       <div className="px-6">
-        <div className="relative w-32 h-32 mx-auto rounded-full shadow-lg">
-          <Image
-            layout="fill"
-            objectFit="contain"
-            alt="Hero profile image"
-            src={image}
-            className="rounded-full"
-          />
-        </div>
+        <ImageRound src={image} className="w-32 h-32 mx-auto shadow-lg" alt="Hero profile image" />
         <div className="pt-6 text-center">
           <h5 className="text-xl font-bold">{name}</h5>
           <p className="mt-1 text-sm font-semibold uppercase text-slate-400">

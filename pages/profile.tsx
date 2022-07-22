@@ -1,10 +1,25 @@
-import React from 'react';
-import Image from 'next/image';
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
+import { unstable_getServerSession } from "next-auth/next";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import ImageRound from "../components/Cards/ImageRound";
+import Footer from "../components/Footers/Footer";
+import Navbar from "../components/Navbars/AuthNavbar";
+import connection from "../utils/connection";
+import { authOptions } from "./api/auth/[...nextauth]";
 
-import Navbar from '../components/Navbars/AuthNavbar';
-import Footer from '../components/Footers/Footer';
+export default function Profile(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
+  const { data: session } = useSession();
+  if (!session || !session.user)
+    return <Link href="/auth/signin">Sign In</Link>;
 
-export default function Profile() {
   return (
     <>
       <Navbar />
@@ -24,7 +39,7 @@ export default function Profile() {
           </div>
           <div
             className="absolute bottom-0 left-0 right-0 top-auto w-full h-16 overflow-hidden pointer-events-none"
-            style={{ transform: 'translateZ(0)' }}
+            style={{ transform: "translateZ(0)" }}
           >
             <svg
               className="absolute bottom-0 overflow-hidden"
@@ -49,13 +64,13 @@ export default function Profile() {
                 <div className="flex flex-wrap justify-center">
                   <div className="flex justify-center w-full px-4 lg:w-3/12 lg:order-2">
                     <div className="relative">
-                      <Image
-                        width={800}
-                        height={800}
-                        alt="..."
-                        src="/img/team-2-800x800.jpg"
-                        className="absolute h-auto -m-16 -ml-20 align-middle border-none rounded-full shadow-xl lg:-ml-16 max-w-150-px"
-                      />
+                      <div className="absolute h-auto -m-20 -ml-20 align-middle border-none lg:-ml-16 max-w-150-px">
+                        <ImageRound
+                          src={session.user.image ?? "/img/team-2-800x800.jpg"}
+                          alt="Profile image"
+                          className="w-40 h-40 shadow-lg"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="w-full px-4 lg:w-4/12 lg:order-3 lg:text-right lg:self-center">
@@ -93,10 +108,10 @@ export default function Profile() {
                 </div>
                 <div className="mt-12 text-center">
                   <h3 className="mb-2 text-4xl font-semibold leading-normal text-slate-700">
-                    Jenna Stones
+                    {props.user.name}
                   </h3>
                   <div className="mt-0 mb-2 text-sm font-bold leading-normal uppercase text-slate-400">
-                    <i className="mr-2 text-lg fas fa-map-marker-alt text-slate-400"></i>{' '}
+                    <i className="mr-2 text-lg fas fa-map-marker-alt text-slate-400"></i>{" "}
                     Los Angeles, California
                   </div>
                   <div className="mt-10 mb-2 text-slate-600">
@@ -136,4 +151,23 @@ export default function Profile() {
       <Footer />
     </>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  const user = await connection.user.findUniqueOrThrow({
+    where: {
+      email: session?.user?.email!,
+    },
+  }); // your fetch function here
+
+  return {
+    props: {
+      user,
+    },
+  };
 }

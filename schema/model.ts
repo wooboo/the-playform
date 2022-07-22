@@ -1,4 +1,9 @@
 import z from "zod";
+export const Entity = z.object({
+  id: z.string(),
+});
+
+export type Entity = z.TypeOf<typeof Entity>;
 
 export const User = z.object({
   name: z.string(),
@@ -21,6 +26,7 @@ export const BankAccount = z.object({
 export type BankAccount = z.infer<typeof BankAccount>;
 
 export const Owner = z.object({
+  id: z.string(),
   name: z.string(),
   email: z.string().email(),
   bankAccount: BankAccount,
@@ -37,8 +43,9 @@ export const Tenant = z.object({
 export type Tenant = z.infer<typeof Tenant>;
 
 export const Fraction = z.object({
-  name: z.string(),
-});
+  numerator: z.number(),
+  denominator: z.number(),
+}).or(z.string());
 export type Fraction = z.infer<typeof Fraction>;
 
 export const PropertyOwner = z.object({
@@ -57,5 +64,5 @@ export const Property = z.object({
   owners: z.array(PropertyOwner),
   premises: z.array(Premises),
   address: Address,
-});
+}).merge(Entity);
 export type Property = z.infer<typeof Property>;
