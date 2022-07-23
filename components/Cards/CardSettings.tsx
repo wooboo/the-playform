@@ -27,16 +27,6 @@ export default function CardSettings() {
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full px-4 lg:w-6/12">
-                <Field label="Date" name="date" value={new Date().toDateString()}>
-                  {(meta) => <input {...meta} type="date" />}
-                </Field>
-              </div>
-              <div className="w-full px-4 lg:w-6/12">
-                <Field label="Username" name="username" value="wooboox">
-                  {(meta) => <input {...meta} type="text" />}
-                </Field>
-              </div>
-              <div className="w-full px-4 lg:w-6/12">
                 <div className="relative w-full mb-3">
                   <label
                     className="block mb-2 text-xs font-bold uppercase text-slate-600"

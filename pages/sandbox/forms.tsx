@@ -42,7 +42,11 @@ export default function Forms() {
     <div className="flex flex-wrap">
       <div className="w-full px-4 lg:w-8/12">
         <div className="relative flex flex-col w-full min-w-0 mb-6 break-words border-0 rounded-lg shadow-lg bg-slate-100">
-          <Form schema={userSchema} onSubmit={(d) => console.log(d)}>
+          <Form
+            schema={userSchema}
+            defaultValues={{ firstName: "Piotr" }}
+            onSubmit={(d) => console.log(d)}
+          >
             {(form) => (
               <>
                 <div className="px-6 py-6 mb-0 bg-white rounded-t">
@@ -58,7 +62,11 @@ export default function Forms() {
                   <Field label="Email" form={form} name="email.email">
                     {(meta) => <input type="text" {...meta} />}
                   </Field>
-                  <Field label="Confirm Email" form={form} name="email.confirmEmail">
+                  <Field
+                    label="Confirm Email"
+                    form={form}
+                    name="email.confirmEmail"
+                  >
                     {(meta) => <input type="text" {...meta} />}
                   </Field>
                   <button

@@ -9,8 +9,7 @@ import { z, ZodType } from "zod";
 
 export const propertyRouter = createRouter().query("all", {
   async resolve({ ctx }) {
-    const session = await ctx.getSession();
-    console.log(session.user?.email);
+    const session = ctx.session;
     const items = await ctx.connection.property.findMany({
       where: {
         OR: [

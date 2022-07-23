@@ -67,10 +67,15 @@ export default function Tables() {
                 footer: (props) => props.column.id,
                 accessorKey: "name",
                 cell: (info) => info.getValue(),
-              },{
+              },
+              {
                 header: "City",
-                accessorFn: (r)=>r.address.city,
-              }
+                accessorFn: (r) => r.address.city,
+              },
+              {
+                header: "Street",
+                accessorFn: (r) => r.address.street,
+              },
             ]}
             data={properties.data}
           />
