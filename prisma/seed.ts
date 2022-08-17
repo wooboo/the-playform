@@ -29,7 +29,7 @@ type Premises = {
 type PrOwner = { id: string; owners: [Ref]; fraction: string };
 
 async function load<TModel>(dir: string) {
-  var containerClient = storage.getContainerClient("import");
+  const containerClient = storage.getContainerClient("import");
   const listing = containerClient.listBlobsByHierarchy("/", {
     prefix: `${dir}/`,
   });
@@ -54,9 +54,9 @@ async function streamToText(readable: NodeJS.ReadableStream) {
   return data;
 }
 async function main() {
-  var owners = await load<Owner>("Owners");
-  var properties = await load<Property>("Properties");
-  var premises = await load<Premises>("Premises");
+  const owners = await load<Owner>("Owners");
+  const properties = await load<Property>("Properties");
+  const premises = await load<Premises>("Premises");
   for (const owner of owners) {
     const { id, ...props } = owner;
     const data = {

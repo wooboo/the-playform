@@ -1,9 +1,11 @@
 import { createRouter } from "../createRouter";
-import { userRouter } from "./user.router";
-import { propertyRouter } from "./property.router";
+import { usersRouter } from "./users.router";
+import { propertiesRouter } from "./properties.router";
+import { filesRouter } from "./files.router";
 
 export const appRouter = createRouter()
-  .merge("users.", userRouter)
-  .merge("properties.", propertyRouter);
+  .merge("users.", usersRouter)
+  .merge("properties.", propertiesRouter)
+  .merge("files.", filesRouter);
 
 export type AppRouter = typeof appRouter;

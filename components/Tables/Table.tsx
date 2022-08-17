@@ -86,7 +86,7 @@ export default function Table<TData>({
                 >
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <td key={cell.id} className="px-6 py-4">
+                      <td key={cell.id} className="relative px-6 py-4">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -100,7 +100,7 @@ export default function Table<TData>({
         </tbody>
       </table>
       <nav
-        className="flex items-center justify-between pt-4"
+        className="flex items-center justify-between p-2"
         aria-label="Table navigation"
       >
         <button
@@ -139,7 +139,7 @@ export default function Table<TData>({
           </strong>
         </span>
         <span className="flex items-center gap-1">
-          | Go to page:
+          Go to page:
           <input
             type="number"
             defaultValue={table.getState().pagination.pageIndex + 1}
@@ -151,6 +151,7 @@ export default function Table<TData>({
           />
         </span>
         <select
+          className="w-24 p-1 border rounded"
           value={table.getState().pagination.pageSize}
           onChange={(e) => {
             table.setPageSize(Number(e.target.value));

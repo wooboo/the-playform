@@ -7,35 +7,18 @@ import { PropertyListItem } from "../../schema/requests";
 import { createRouter } from "../createRouter";
 import { z, ZodType } from "zod";
 
-export const propertyRouter = createRouter().query("all", {
+export const propertiesRouter = createRouter().query("all", {
   async resolve({ ctx }) {
     const session = ctx.session;
-    const items = await ctx.connection.property.findMany({
+    const items = await ctx.db.property.findMany({
       where: {
-        OR: [
-          {
+        owners: {
+          some: {
             owners: {
-              some: {
-                owners: {
-                  some: { email: session.user?.email },
-                },
-              },
+              some: { email: session.user?.email },
             },
           },
-          {
-            premises: {
-              some: {
-                owners: {
-                  some: {
-                    owners: {
-                      some: { email: session.user?.email },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        ],
+        },
       },
       select: Prisma.validator<Prisma.PropertySelect>()({
         id: true,

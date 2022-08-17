@@ -81,11 +81,11 @@ model PropertyOwner {
 }
 
 model PremisesOwner {
-  id       String     @id
+  id         String   @id
   premisesId String
   premises   Premises @relation(fields: [premisesId], references: [id], onDelete: Cascade)
-  owners   Owner[]
-  fraction Json
+  owners     Owner[]
+  fraction   Json
 }
 
 model Property {
